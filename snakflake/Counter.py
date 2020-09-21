@@ -21,8 +21,8 @@ class TimestampCounter(object):
 
     """
     _last_timestamp: Value  # 计数的时间戳,以double 类型保存int 值,以确保数据长度
-    _counter: Value # 计数器,此处同样使用了double 类型保存int 值,实际情况可根据状态并发数修改,位数不够容易发生溢出
-    _lock: Lock # 锁,多进程间访问控制
+    _counter: Value  # 计数器,此处同样使用了double 类型保存int 值,实际情况可根据状态并发数修改,位数不够容易发生溢出
+    _lock: Lock  # 锁,多进程间访问控制
 
     def __init__(self):
 
@@ -41,11 +41,10 @@ class TimestampCounter(object):
     def get_index(self):
         timestamp = TimestampCounter.get_timestamp()
         with self._lock:
+
             if timestamp == self._last_timestamp.value:
                 self._counter.value += 1
             else:
                 self._last_timestamp.value = timestamp
                 self._counter.value = 0
-
-        logging.debug(f"processid:{os.getpid()} \t tmestamp:{timestamp}:\t{self._counter.value}")
-        return self._counter.value
+        return int(self._counter.value)
