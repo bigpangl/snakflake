@@ -18,14 +18,14 @@ logging.basicConfig(level=logging.DEBUG)
 
 def test(counter: Snow):
     while True:
-        logging.debug(counter.guid())
+        counter.guid()
 
 
 if __name__ == '__main__':
     snow = Snow(10,int(time.time() * 1000))
 
     tests = []
-    for _ in range(10):
+    for _ in range(1):
         p = Process(target=test, args=(snow,))
         tests.append(p)
     for process in tests:

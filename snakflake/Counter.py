@@ -8,8 +8,6 @@ Python:     python3.6
 计数器
 
 """
-import os
-import logging
 import time
 from multiprocessing import Value, Lock
 
@@ -38,10 +36,13 @@ class TimestampCounter(object):
         """
         return int(time.time() * 1000)
 
-    def get_index(self):
+    def get_index(self) -> int:
+        """
+        获取当前时间点中的序号
+        :return: int
+        """
         timestamp = TimestampCounter.get_timestamp()
         with self._lock:
-
             if timestamp == self._last_timestamp.value:
                 self._counter.value += 1
             else:

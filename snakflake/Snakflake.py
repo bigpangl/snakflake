@@ -7,7 +7,6 @@ Python:     python3.6
 
 """
 import time
-import logging
 
 from .Counter import TimestampCounter
 
@@ -35,9 +34,9 @@ class Snow(object):
         self._times_map_move = times_map_move
         self._index_move = index_move
 
-        assert self._machine_id < -1 ^ (-1 << self._machine_id_move), Exception("设备ID 没有超过上限")
+        assert self._machine_id < -1 ^ (-1 << self._machine_id_move), Exception("设备ID 超过位数上限")
 
-    def get_times_map(self) -> int:
+    def get_increment_times_map(self) -> int:
         """
         增量时间戳
         :return:
@@ -51,7 +50,7 @@ class Snow(object):
         计算分布式自增 ID
         :return:
         """
-        times_map = self.get_times_map()
+        times_map = self.get_increment_times_map()
         index: int = self._counter.get_index()
         assert index < -1 ^ (-1 << self._index_move), Exception(f"序号超出位数上限")
         up_id = times_map << (self._machine_id_move + self._index_move) | self._machine_id << self._index_move | index
