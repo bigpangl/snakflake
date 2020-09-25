@@ -6,3 +6,7 @@ build
 dist
 *.egg-info
 MANIFEST
+
+*.html
+*.*win_amd64.pyd
+*.c

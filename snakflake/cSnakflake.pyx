@@ -1,24 +1,10 @@
-"""
-
-Project:    snakflake
-Author:     LanHao
-Date:       2020/9/21
-Python:     python3.6
-
-"""
+#cython:language_level=3
 import time
 
 # from .Counter import TimestampCounter
 from .cCounter import TimestampCounter
 
 class Snow(object):
-    _start_times_map: int  # 时间戳开始时间
-    _counter: TimestampCounter  # 多进程安全的时间戳计数器
-    _machine_id: int  # 服务器所在ID
-
-    _machine_id_move: int  # 服务器ID 位移位数
-    _times_map_move: int  # 时间戳位移位数
-    _index_move: int  # 序列号位移个数
 
     def __init__(self, machine_id: int, start_times_map: int, times_map_move: int = 41, machine_id_move: int = 10,
                  index_move: int = 12):

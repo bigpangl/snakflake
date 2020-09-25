@@ -10,19 +10,26 @@ import time
 import logging
 from multiprocessing import Process
 
-from snakflake.Counter import TimestampCounter
-from snakflake.Snakflake import Snow
+# from snakflake.Counter import TimestampCounter
+from snakflake.cCounter import TimestampCounter
+from snakflake.cSnakflake import Snow
 
 logging.basicConfig(level=logging.DEBUG)
 
 
+# print(get_timestamp())
+
+# counter = TimestampCounter()
+# #
+# while True:
+#     logging.debug(counter.get_index())
 def test(counter: Snow):
     while True:
-        counter.guid()
-
+        # logging.debug(f"获取到的id 为:{counter.guid()}")
+        print(counter.guid())
 
 if __name__ == '__main__':
-    snow = Snow(10,int(time.time() * 1000))
+    snow = Snow(10, int(time.time() * 1000))
 
     tests = []
     for _ in range(1):
